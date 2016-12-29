@@ -16,9 +16,12 @@ server.register(require('inert'), (err) => {
 
     server.route({
         method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-            reply.file('./public/index.html');
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: 'public',
+                listing: true
+            }
         }
     });
 
