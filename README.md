@@ -11,6 +11,7 @@
 1. Create a basic Hapi.js server
 1. Serve an index.html
 1. Serve a css and javascript file to the client
+1. Dynamically list stations for client
 1. Serve a list of stations via sockets (cRud)
 1. Add a station via socket (CRud)
 1. Delete a station via socket (CRuD)
