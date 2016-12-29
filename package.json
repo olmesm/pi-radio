@@ -1,0 +1,22 @@
+{
+  "name": "pi-radio",
+  "version": "1.0.0",
+  "description": "An internet radio, by you, on the pi!",
+  "main": "public/server.js",
+  "scripts": {
+    "test": "na"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olmesm/pi-radio.git"
+  },
+  "author": "Oliver Smit (@olmesm)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olmesm/pi-radio/issues"
+  },
+  "homepage": "https://github.com/olmesm/pi-radio#readme",
+  "dependencies": {
+    "hapi": "^16.0.3"
+  }
+}
