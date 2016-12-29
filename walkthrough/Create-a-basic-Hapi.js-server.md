@@ -50,3 +50,7 @@ server.start((err) => {
 Run it to test it with `node private/server.js` then visit [http://localhost:8000/hello](http://localhost:8000/hello)
 
 [Next](#)
+
+## Resources
+
+* [Hapi.js](https://hapijs.com/)

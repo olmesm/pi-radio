@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/olmesm/pi-radio#readme",
   "dependencies": {
-    "hapi": "^16.0.3"
+    "hapi": "^16.0.3",
+    "inert": "^4.1.0"
   }
 }

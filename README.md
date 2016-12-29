@@ -8,7 +8,6 @@
 
 ## Steps
 
-1.
 1. Create a basic Hapi.js server
 1. Serve an index.html
 1. Serve a css and javascript file to the client
