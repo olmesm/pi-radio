@@ -8,6 +8,15 @@ server.connection({
     port: 8000
 });
 
+const io = require('socket.io')(server.listener);
+const stationsList = require('./stationsList');
+
+function handleClient(socket) {
+  io.emit('stationsList', stationsList);
+};
+
+io.on('connection', handleClient);
+
 server.register(require('inert'), (err) => {
 
     if (err) {

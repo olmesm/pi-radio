@@ -11,12 +11,13 @@
     <p>Hello from the Pi Radio Server</p>
     <div id="pi-radio">
       <ul>
-        <li v-for="station in stations">
+        <li v-for="station in stationsList">
           {{ station.name }}
         </li>
       </ul>
     </div>
   </body>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
 </html>

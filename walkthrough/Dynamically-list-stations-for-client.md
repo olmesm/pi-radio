@@ -106,4 +106,5 @@ Hopefully in the long run it keeps our project easier to maintain and understand
 
 ## Resources
 
-* [Hapi.js Website - Serving static files](https://hapijs.com/tutorials/serving-files?lang=en_US#replyfile)
+* [Vue.js getting started guide](https://vuejs.org/v2/guide/#Getting-Started)
+* [Conditionals and Loops](https://vuejs.org/v2/guide/#Conditionals-and-Loops)
