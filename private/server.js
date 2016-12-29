@@ -13,6 +13,11 @@ const stations = require('./stations');
 
 function handleClient(socket) {
   io.emit('stations.list', stations.list);
+
+  socket.on('station.add', newStation => {
+    stations.add(newStation);
+    io.emit('stations.list', stations.list);
+  });
 };
 
 io.on('connection', handleClient);

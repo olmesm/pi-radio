@@ -15,11 +15,17 @@ function save() {
   });
 }
 
+function add(station) {
+  list.push(station);
+  save();
+}
+
 read();
 
 const stations = {
   list,
   save,
+  add,
 };
 
 module.exports = stations;

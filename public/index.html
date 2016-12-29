@@ -7,14 +7,24 @@
     <title>Pi Radio</title>
   </head>
   <body>
-    <h1>Pi Radio</h1>
-    <p>Hello from the Pi Radio Server</p>
     <div id="pi-radio">
-      <ul>
-        <li v-for="station in stationsList">
-          {{ station.name }}
-        </li>
-      </ul>
+      <h1>Pi Radio</h1>
+
+      <h2>Add a station</h2>
+      <label for="name">Name:
+        <input v-model="newStation.name">
+      </label>
+      <label for="url">URL:
+        <input v-model="newStation.url">
+      </label>
+      <button @click="add()">Submit</button>
+
+      <h2>Stations</h2>
+        <ul>
+          <li v-for="station in stationsList">
+            {{ station.name }}
+          </li>
+        </ul>
     </div>
   </body>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
