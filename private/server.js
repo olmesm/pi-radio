@@ -9,10 +9,10 @@ server.connection({
 });
 
 const io = require('socket.io')(server.listener);
-const stationsList = require('./stationsList');
+const stations = require('./stations');
 
 function handleClient(socket) {
-  io.emit('stationsList', stationsList);
+  io.emit('stations.list', stations.list);
 };
 
 io.on('connection', handleClient);

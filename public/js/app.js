@@ -7,7 +7,7 @@ var piRadio = new Vue({
   },
 });
 
-socket.on('stationsList', function (data) {
+socket.on('stations.list', function (data) {
   piRadio.stationsList = data;
 });
 

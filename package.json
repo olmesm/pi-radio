@@ -4,6 +4,7 @@
   "description": "An internet radio, by you, on the pi!",
   "main": "public/server.js",
   "scripts": {
+    "start": "node private/server.js",
     "test": "na"
   },
   "repository": {

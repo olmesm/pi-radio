@@ -12,10 +12,10 @@
 1. Serve an index.html
 1. Serve a css and javascript file to the client
 1. Dynamically list stations for client
+1. Store stations in file
 1. Serve a list of stations via sockets (cRud)
 1. Add a station via socket (CRud)
 1. Delete a station via socket (CRuD)
-1. Store stations in DB
 1. Start a node process
 1. Start playing a station
 1. Get the currently playing station and display on the client
