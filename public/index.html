@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Pi Radio</title>
   </head>
@@ -10,26 +11,41 @@
     <div id="pi-radio">
       <h1>Pi Radio</h1>
 
-      <h2>Add a station</h2>
-      <label for="name">Name:
-        <input v-model="newStation.name">
-      </label>
-      <label for="url">URL:
-        <input v-model="newStation.url">
-      </label>
-      <button @click="add">Submit</button>
+      <section class="controls">
+        <h2>Controls</h2>
+        <section class="status">
+          <article class="station-name">
+            {{ stationName }}
+          </article>
+          <article class="now-playing">
+            {{ nowPlaying }}
+          </article>
+        </section>
+        <button class="button-big grey" @click="stopStation">Stop</button>
 
-      <h2>Controls</h2>
-      {{ stationName }} : {{ nowPlaying }}
-      <button @click="stopStation">Stop</button>
+        <h2>Add a station</h2>
+        <div class="">
+          <label for="name">Name:
+            <input class="border" v-model="newStation.name">
+          </label>
+        </div>
+        <div class="">
+          <label for="url">URL:
+            <input class="border" v-model="newStation.url">
+          </label>
+        </div>
+        <div class="">
+          <button class="button-big grey" @click="add">Submit</button>
+        </div>
+      </section>
 
-      <h2>Stations</h2>
-        <ul>
-          <li v-for="(station, index) in stationsList">
-            <button @click="playStation(index)">{{ station.name }}</button>
-            <button @click="remove(index)">x</button>
-          </li>
-        </ul>
+      <section class="station-list">
+        <h2>Stations</h2>
+        <div v-for="(station, index) in stationsList">
+          <button class="button-big grey" @click="playStation(index)">{{ station.name }}</button>
+          <button class="delete grey" @click="remove(index)">x</button>
+        </div>
+      </section>
     </div>
   </body>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>

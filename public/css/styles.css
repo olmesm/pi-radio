@@ -1,1 +1,62 @@
-* { color: red; }
+* {
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+}
+
+input {
+  display: block;
+  text-align: left;
+  width: 75%;
+  min-width: 200px;
+  padding: 12px 20px;
+  margin: 8px auto;
+  box-sizing: border-box;
+}
+
+.grey {
+  background: #eee;
+}
+
+.border,
+.grey {
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+}
+
+.button-big {
+  width: 200px;
+}
+
+.station-list .delete {
+  width: 35px;
+}
+
+.status {
+  margin-left: -8px;
+  width: calc(100% + 16px);
+}
+
+.status article {
+  line-height: 25px;
+}
+
+.controls {
+
+}
+
+.status article {
+  height: 25px;
+}
+
+.station-name {
+
+}
+
+.now-playing {
+
+}
+
+button {
+  height: 35px;
+  margin: 5px 0;
+}

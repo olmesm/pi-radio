@@ -13,7 +13,7 @@ I've used the following to develop the pi-radio. Basic programming knowledge is 
 * SSH
 * Nginx
 * Raspberry Pi
-    - Vue.js
+* Vue.js
 * Node
     - Hapi.js
     - Socket.io
