@@ -13,11 +13,13 @@ function remove(index) {
 }
 
 function playStation(index) {
-  socket.emit('station.play', index)
+  piRadio.stationName = 'Loading...';
+  socket.emit('station.play', index);
 }
 
 function stopStation() {
-  socket.emit('station.stop')
+  piRadio.stationName = 'Stopping...';
+  socket.emit('station.stop');
 }
 
 var piRadio = new Vue({
@@ -25,6 +27,8 @@ var piRadio = new Vue({
   data: {
     stationsList: [],
     newStation: {},
+    stationName: 'Stopped',
+    nowPlaying: '',
   },
   methods: {
     add,
@@ -32,6 +36,16 @@ var piRadio = new Vue({
     playStation,
     stopStation,
   },
+});
+
+socket.on('streamer.statusUpdate', function (data) {
+  if (!data) {
+    piRadio.nowPlaying = '';
+    piRadio.stationName = 'Stopped';
+  } else {
+    if (data.nowPlaying) { piRadio.nowPlaying = data.nowPlaying; }
+    if (data.stationName) { piRadio.stationName = data.stationName; }
+  }
 });
 
 socket.on('stations.list', function (data) {

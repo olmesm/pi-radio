@@ -9,9 +9,13 @@ server.connection({
 });
 
 const io = require('socket.io')(server.listener);
-
 const stations = require('./stations');
-const streamer = require('./streamer.js');
+
+function streamerStatusUpdate(update) {
+  io.emit('streamer.statusUpdate', update);
+}
+
+const streamer = require('./streamer.js')(streamerStatusUpdate);
 
 function handleClient(socket) {
   io.emit('stations.list', stations.list);
@@ -25,6 +29,7 @@ function handleClient(socket) {
   });
 
   socket.on('station.play', index => {
+    io.emit('streamer.statusUpdate', { stationName: stations.list[index].name });
     streamer.play(stations.list[index].url);
   });
 
