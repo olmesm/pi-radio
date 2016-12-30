@@ -3,7 +3,7 @@ const spawn = require('child_process').spawn;
 let radioStream;
 
 function play(url) {
-  radioStream = spawn('top');
+  radioStream = spawn('mplayer', ['-playlist', url]);
 
   radioStream.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
