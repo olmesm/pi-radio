@@ -86,8 +86,6 @@
 
     Open a browser on your local machine and go to http://raspberrypi or the ip address of the raspberry pi - http://192.168.1.148 (your's will be different). If you see the webpage - you've done it!
 
-    All thats left to do is style the app.
-
 ### Audio issues
 
 Depending on the configuration of your pi, it may not play any audio. This is usually because the audio device needs to be plugged in before powering on the pi. If you need to plug in a device simply pull out the power cable, add your device and power the pi back on.

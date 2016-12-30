@@ -44,3 +44,7 @@ pi: $ pm2 startup systemd
 pi: $ pm2 start private/server.js --name pi-radio
 pi: $ pm2 save
 ```
+
+Confirm this all works, restart the pi - wait a minute or so and then check if it still works.
+
+If so, you're done! All thats left is to style the app!
