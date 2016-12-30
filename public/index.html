@@ -17,12 +17,15 @@
       <label for="url">URL:
         <input v-model="newStation.url">
       </label>
-      <button @click="add()">Submit</button>
+      <button @click="add">Submit</button>
+
+      <h2>Controls</h2>
+      <button @click="stopStation">Stop</button>
 
       <h2>Stations</h2>
         <ul>
           <li v-for="(station, index) in stationsList">
-            {{ index }} - {{ station.name }}
+            <button @click="playStation(index)">{{ station.name }}</button>
             <button @click="remove(index)">x</button>
           </li>
         </ul>

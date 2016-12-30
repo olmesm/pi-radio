@@ -35,7 +35,7 @@ Also notice the [@click](https://vuejs.org/v2/guide/syntax.html#v-on-Shorthand) 
     <label for="url">URL:
       <input v-model="newStation.url">
     </label>
-    <button @click="add()">Submit</button>
+    <button @click="add">Submit</button>
 
     <h2>Stations</h2>
       <ul>

@@ -9,7 +9,9 @@ server.connection({
 });
 
 const io = require('socket.io')(server.listener);
+
 const stations = require('./stations');
+const streamer = require('./streamer.js');
 
 function handleClient(socket) {
   io.emit('stations.list', stations.list);
@@ -20,6 +22,14 @@ function handleClient(socket) {
 
   socket.on('station.remove', index => {
     io.emit('station.removed', stations.remove(index));
+  });
+
+  socket.on('station.play', index => {
+    streamer.play(stations.list[index].url);
+  });
+
+  socket.on('station.stop', () => {
+    streamer.stop();
   });
 };
 

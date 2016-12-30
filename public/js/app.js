@@ -12,6 +12,14 @@ function remove(index) {
   socket.emit('station.remove', index);
 }
 
+function playStation(index) {
+  socket.emit('station.play', index)
+}
+
+function stopStation() {
+  socket.emit('station.stop')
+}
+
 var piRadio = new Vue({
   el: '#pi-radio',
   data: {
@@ -21,6 +29,8 @@ var piRadio = new Vue({
   methods: {
     add,
     remove,
+    playStation,
+    stopStation,
   },
 });
 
