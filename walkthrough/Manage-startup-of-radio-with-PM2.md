@@ -41,6 +41,9 @@ We need to initialise pm2 and start our server.
 
 ```bash
 pi: $ pm2 startup systemd
+
+# the above may request you to run a sudo .. command - do it.
+
 pi: $ pm2 start private/server.js --name pi-radio
 pi: $ pm2 save
 ```

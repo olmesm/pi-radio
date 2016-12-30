@@ -4,7 +4,7 @@
 
     [Download the Lite Raspbian](https://www.raspberrypi.org/downloads/raspbian/) release - I'm using Jessie Lite (November 2016). Instructions to set it up are on the website.
 
-    Since I'm going headless and too lazy to get a keyboard, you will need to enable SSH on boot. Do this by placing a blank file saved with the name `ssh` - no extension, on the SD card boot partition.
+    Since I'm too lazy to get a keyboard out the cupboard I'm going headless, and will need to enable SSH on boot. Do this by placing a blank file saved with the name `ssh` - no extension, on the SD card boot partition.
 
     Finally plug in the pi to your router, slip in the SD card, FINALLY power it on.
 
@@ -13,7 +13,7 @@
     Either use Angry IP, or login to your home router (normally 192.168.0.1 or 192.168.1.1) and find the IP address of the pi.
     My pi ip address is 192.168.1.148. You can also try using the pi device name `raspberrypi`
 
-    Open terminal and start up an ssh session, logging in as the default user pi, password raspberry.
+    Open terminal and start up an [ssh session](https://support.rackspace.com/how-to/connecting-to-a-server-using-ssh-on-linux-or-mac-os/), logging in as the default user pi, password raspberry.
 
     ```
     $ ssh pi@192.168.1.148 # or ssh pi@raspberrypi
@@ -62,8 +62,6 @@
     ```
     # Get NVM
     wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.6/install.sh | bash
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
     # Install node
     pi: $ nvm install node
@@ -74,8 +72,12 @@
     pi: $ node -v
     v7.3.0
     ```
+
 1. Install Mplayer
 
     ```bash
     pi: $ sudo apt-get install mplayer2 -y
     ```
+
+## Resources
+* [How to SSH](https://support.rackspace.com/how-to/connecting-to-a-server-using-ssh-on-linux-or-mac-os/)

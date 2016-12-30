@@ -2,7 +2,81 @@
 
 ## Why?
 
-## Initial Setup
+I enjoy listening to Internet radio plus I want to give back to the open source community.
+
+I feel this project is an awesome springboard into understanding what you can do with node, it also allows you to safely develop new knowledge in coding.
+
+## Technology/Stacks Used
+
+I've used the following to develop the pi-radio. Basic programming knowledge is required, however the steps are pretty well written out and this was created with the weekend hacker in mind.
+
+* SSH
+* Nginx
+* Raspberry Pi
+    - Vue.js
+* Node
+    - Hapi.js
+    - Socket.io
+* es5 and es6
+
+## To Run
+
+Two options:
+
+1. You can make this yourself with the tutorial I've created
+1. You could clone this directly to the pi and run it there.
+
+## Lazy Guide
+
+Do the steps in the [Setup Pi](/walkthrough/Setup-Pi.md) section, then install git.
+
+```bash
+pi: $ sudo apt-get update
+pi: $ sudo apt-get upgrade              # this can take a while
+pi: $ sudo apt-get install git -y
+```
+
+Then follow the steps in [Manage serving with Nginx](/walkthrough/Manage-serving-with-Nginx.md) till the step where you copy the files to the pi. Instead do the following:
+
+```bash
+pi: $ cd ~
+pi: $ git clone https://github.com/olmesm/pi-radio.git
+pi: $ cd pi-radio
+pi: $ npm run setup
+```
+
+Then test it out with below:
+
+```bash
+pi: $ npm start
+```
+
+Open a browser on your local machine and go to http://raspberrypi or the ip address of the raspberry pi - http://192.168.1.148 (your's will be different).
+
+Finally set up the pi so it loads the server when it boots;
+
+```bash
+pi: $ pm2 startup systemd
+
+# the above may request you to run a sudo .. command - do it.
+
+pi: $ pm2 start private/server.js --name pi-radio
+pi: $ pm2 save
+```
+
+Confirm this all works, restart the pi - wait a minute or so and then check if it still works.
+
+You're done!
+
+## Development Rig
+
+I'm doing this on a mac, but you shouldn't have any issues doing this on another linux based PC. If you're on Windows you should be able to get this working however I do use quite a few shell commands.
+
+I would assume you have a raspberry pi to hand so I don't see any reason this can't be programmed with and directly onto the pi.
+
+## Final notes
+
+Enjoy my efforts and drop me a [tweet](https://twitter.com/oh_es) if you enjoyed this or have any questions.
 
 ## Style
 
