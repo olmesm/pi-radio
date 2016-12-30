@@ -1,16 +1,77 @@
 # Setup Pi
 
-I had various problems with nvm not starting up on booting the pi. Largely it was taking too long to start node via nvm.
+1. Install Jessie
 
-[Thanks to this dude](https://github.com/audstanley/NodeJs-Raspberry-Pi) for his script, you can copy and paste the following within the node ssh session.
+    [Download the Lite Raspbian](https://www.raspberrypi.org/downloads/raspbian/) release - I'm using Jessie Lite (November 2016). Instructions to set it up are on the website.
 
-```bash
-sudo apt-get update
-sudo apt-get install git -y
-git clone https://github.com/audstanley/NodeJs-Raspberry-Pi
-cd NodeJs-Raspberry-Pi
-chmod +x Install-Node.sh
-sudo ./Install-Node.sh
-cd .. && rm -R -f NodeJs-Raspberry-Pi/
-node -v
-```
+    Since I'm going headless and too lazy to get a keyboard, you will need to enable SSH on boot. Do this by placing a blank file saved with the name `ssh` on the SD card boot partition.
+
+    Finally plug in the pi to your router, slip in the SD card, FINALLY power it on.
+
+1. SSH in
+
+    Either use Angry IP, or login to your home router (normally 192.168.0.1 or 192.168.1.1) and find the IP address of the pi.
+    My pi ip address is 192.168.1.148. You can also try using the pi device name `raspberrypi`
+
+    Open terminal and start up an ssh session, logging in as the default user pi, password raspberry.
+
+    ```
+    $ ssh pi@192.168.1.148 # or ssh pi@raspberrypi
+
+    The authenticity of host '192.168.1.148 (192.168.1.148)' can't be established.
+    ECDSA key fingerprint is SHA256:xxxxxxxxxxxx.
+    Are you sure you want to continue connecting (yes/no)?
+    $ yes
+
+    Warning: Permanently added '192.168.1.148' (ECDSA) to the list of known hosts.
+    pi@192.168.1.148's password:
+    $ raspberry
+
+    The programs included with the Debian GNU/Linux system are free software;
+    the exact distribution terms for each program are described in the
+    individual files in /usr/share/doc/*/copyright.
+
+    Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+    permitted by applicable law.
+
+    SSH is enabled and the default password for the 'pi' user has not been changed.
+    This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+    pi@raspberrypi:~ $
+    ```
+
+    We're in!
+
+    From now on, I will differentiate between the pi's shell and local shell by prefixing the pi's terminal with `pi: $`
+
+1. Raspi-config
+
+    Two important steps are to expand your pi's filesystem and change the password. This is done via `raspi-config`
+
+    ```bash
+    pi: $ sudo raspi-config
+
+    # Select first option
+    # Once complete change your pi user's password via option 2
+
+    pi: $ sudo reboot
+    ```
+
+1. Install Node.js
+
+    I had various problems with nvm not starting up on booting the pi. Largely it was taking too long to start node via nvm.
+
+    [Thanks to this dude](https://github.com/audstanley/NodeJs-Raspberry-Pi) for his script, you can copy and paste the following within the node ssh session.
+
+    ```bash
+    pi: $ sudo apt-get update
+    pi: $ sudo apt-get install git -y
+    pi: $ git clone https://github.com/audstanley/NodeJs-Raspberry-Pi
+    pi: $ cd NodeJs-Raspberry-Pi
+    pi: $ chmod +x Install-Node.sh
+    pi: $ sudo ./Install-Node.sh
+    pi: $ cd .. && rm -R -f NodeJs-Raspberry-Pi/
+    pi: $ node -v
+    ```
+
+    
