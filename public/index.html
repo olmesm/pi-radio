@@ -21,8 +21,9 @@
 
       <h2>Stations</h2>
         <ul>
-          <li v-for="station in stationsList">
-            {{ station.name }}
+          <li v-for="(station, index) in stationsList">
+            {{ index }} - {{ station.name }}
+            <button @click="remove(index)">x</button>
           </li>
         </ul>
     </div>

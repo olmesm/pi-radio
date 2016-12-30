@@ -8,6 +8,10 @@ function add() {
   piRadio.newStation = {};
 }
 
+function remove(index) {
+  socket.emit('station.remove', index);
+}
+
 var piRadio = new Vue({
   el: '#pi-radio',
   data: {
@@ -16,11 +20,20 @@ var piRadio = new Vue({
   },
   methods: {
     add,
+    remove,
   },
 });
 
 socket.on('stations.list', function (data) {
   piRadio.stationsList = data;
+});
+
+socket.on('station.added', function (data) {
+  piRadio.stationsList.push(data);
+});
+
+socket.on('station.removed', function (data) {
+  piRadio.stationsList.splice(data);
 });
 
 socket.on('connect', function () {

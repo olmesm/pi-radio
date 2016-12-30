@@ -15,8 +15,11 @@ function handleClient(socket) {
   io.emit('stations.list', stations.list);
 
   socket.on('station.add', newStation => {
-    stations.add(newStation);
-    io.emit('stations.list', stations.list);
+    io.emit('station.added', stations.add(newStation));
+  });
+
+  socket.on('station.remove', index => {
+    io.emit('station.removed', stations.remove(index));
   });
 };
 

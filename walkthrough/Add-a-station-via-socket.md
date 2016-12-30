@@ -160,7 +160,7 @@ That does the trick.
 
 Let's verify that the user inputs a name and url.
 
-In `app.js` just a simple *check-if-both-fields-aren't-blank* will suffice
+In `app.js`, just a simple *check-if-both-fields-aren't-blank* will suffice, also while we are at it, clear the newStation fields if successful.
 
 ```js
 function add() {
@@ -175,8 +175,6 @@ function add() {
 ## What else can you do?
 
 - If the submission is unsuccessful the client should be be alerted.
-
-Otherwise next step!
 
 [Next](#)
 

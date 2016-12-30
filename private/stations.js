@@ -18,6 +18,13 @@ function save() {
 function add(station) {
   list.push(station);
   save();
+  return station;
+}
+
+function remove(index) {
+  list.splice(index, 1);
+  save();
+  return index;
 }
 
 read();
@@ -26,6 +33,7 @@ const stations = {
   list,
   save,
   add,
+  remove,
 };
 
 module.exports = stations;
