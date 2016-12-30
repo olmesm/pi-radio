@@ -4,7 +4,7 @@
   "description": "An internet radio, by you, on the pi!",
   "main": "public/server.js",
   "scripts": {
-    "setup": "npm i",
+    "setup": "npm i && sudo npm i pm2 -g",
     "start": "node private/server.js",
     "test": "na"
   },

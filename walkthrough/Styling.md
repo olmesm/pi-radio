@@ -1,4 +1,4 @@
-# Jazz up with CSS
+# Styling
 
 [Next](#)
 
