@@ -23,4 +23,4 @@
 1. Setup Pi
 1. Manage serving with Nginx
 1. Manage startup of radio with PM2
-1. Jazz up with CSS
+1. Styling

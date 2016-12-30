@@ -4,7 +4,7 @@
 
     [Download the Lite Raspbian](https://www.raspberrypi.org/downloads/raspbian/) release - I'm using Jessie Lite (November 2016). Instructions to set it up are on the website.
 
-    Since I'm going headless and too lazy to get a keyboard, you will need to enable SSH on boot. Do this by placing a blank file saved with the name `ssh` on the SD card boot partition.
+    Since I'm going headless and too lazy to get a keyboard, you will need to enable SSH on boot. Do this by placing a blank file saved with the name `ssh` - no extension, on the SD card boot partition.
 
     Finally plug in the pi to your router, slip in the SD card, FINALLY power it on.
 
@@ -57,21 +57,25 @@
     pi: $ sudo reboot
     ```
 
-1. Install Node.js
+1. Install NVM and Node.js
 
-    I had various problems with nvm not starting up on booting the pi. Largely it was taking too long to start node via nvm.
+    ```
+    # Get NVM
+    wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.6/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-    [Thanks to this dude](https://github.com/audstanley/NodeJs-Raspberry-Pi) for his script, you can copy and paste the following within the node ssh session.
+    # Install node
+    pi: $ nvm install node
+
+    pi: $ sudo reboot
+
+    # Let pi reboot then SSH back in
+    pi: $ node -v
+    v7.3.0
+    ```
+1. Install Mplayer
 
     ```bash
-    pi: $ sudo apt-get update
-    pi: $ sudo apt-get install git -y
-    pi: $ git clone https://github.com/audstanley/NodeJs-Raspberry-Pi
-    pi: $ cd NodeJs-Raspberry-Pi
-    pi: $ chmod +x Install-Node.sh
-    pi: $ sudo ./Install-Node.sh
-    pi: $ cd .. && rm -R -f NodeJs-Raspberry-Pi/
-    pi: $ node -v
+    pi: $ sudo apt-get install mplayer2 -y
     ```
-
-    
