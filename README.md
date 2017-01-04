@@ -6,6 +6,8 @@ I enjoy listening to Internet radio plus I want to give back to the open source 
 
 I feel this project is an awesome springboard into understanding what you can do with node, it also allows you to safely develop new knowledge in coding.
 
+This should work on any Raspberry pi. I have it currently running on a model B (the first one).
+
 ## Technology/Stacks Used
 
 I've used the following to develop the pi-radio. Basic programming knowledge is required, however the steps are pretty well written out and this was created with the weekend hacker in mind.
@@ -70,15 +72,19 @@ You're done!
 
 ## Development Rig
 
-I'm doing this on a mac, but you shouldn't have any issues doing this on another linux based PC. If you're on Windows you should be able to get this working however I do use quite a few shell commands.
+I'm doing this on a mac, but you shouldn't have any issues doing this on another linux based PC. If you're on Windows you should be able to get this working however I do use quite a few shell commands in the tutorial.
 
-I would assume you have a raspberry pi to hand so I don't see any reason this can't be programmed with and directly onto the pi.
+Otherwise you are using this on a pi so it wouldn't be difficult to program it directly.
+
+## Still to do/Issues
+
+- Need to publish Station and song info when a user connects - currently it only emits to users with an active connection.
+- Add physical button/s to use the radio without a phone.
+- More Styling.
 
 ## Final notes
 
-Enjoy my efforts and drop me a [tweet](https://twitter.com/oh_es) if you enjoyed this or have any questions.
-
-## Style
+Enjoy my efforts and drop me a [tweet](https://twitter.com/oh_es) if you enjoyed this or have any questions!
 
 ## Steps
 
