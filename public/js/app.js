@@ -57,7 +57,7 @@ socket.on('station.added', function (data) {
 });
 
 socket.on('station.removed', function (data) {
-  piRadio.stationsList.splice(data);
+  piRadio.stationsList.splice(data, 1);
 });
 
 socket.on('connect', function () {
