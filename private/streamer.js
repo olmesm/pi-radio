@@ -6,17 +6,19 @@ const streamer = streamerStatusUpdate => {
   let self = this;
 
   self.radioStream;
-  self.isPlaying;
+  self.currentStation;
+  self.currentSong;
 
   function stop() {
-    self.isPlaying = false;
+    self.currentStation = null;
+    self.currentSong = null;
     self.radioStream.kill();
   }
 
   function play(url) {
-    if (self.isPlaying) { self.stop(); }
+    if (self.currentStation) { self.stop(); }
 
-    self.isPlaying = true;
+    self.currentStation = url;
 
     self.radioStream = spawn('mplayer', ['-playlist', url]);
 
@@ -24,7 +26,8 @@ const streamer = streamerStatusUpdate => {
       if (data.indexOf('StreamTitle') > -1) {
         let nowPlaying = pattern.exec(data)[0].replace('StreamTitle=\'', '');
         nowPlaying = nowPlaying.slice(0, nowPlaying.indexOf('\';'));
-        streamerStatusUpdate({ nowPlaying });
+        self.currentSong = nowPlaying;
+        streamerStatusUpdate({ nowPlaying: self.currentSong });
       }
       // console.log(`stdout: ${data}`); // <- Leave this in incase we need to fault find in future
     });
@@ -34,7 +37,7 @@ const streamer = streamerStatusUpdate => {
     });
 
     self.radioStream.on('close', code => {
-      if (self.isPlaying && code === 1) { return; }
+      if (self.currentStation && code === 1) { return; }
       console.log(`child process exited with code ${code}`);
       streamerStatusUpdate();
     });

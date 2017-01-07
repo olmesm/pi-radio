@@ -9,8 +9,8 @@
 6 silly lifecycle pi-radio@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle pi-radio@1.0.0~start: pi-radio@1.0.0
 8 verbose lifecycle pi-radio@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle pi-radio@1.0.0~start: PATH: /Users/osmt/.npm-packages/lib/node_modules/npm/bin/node-gyp-bin:/Users/osmt/personal/pi-radio-3/node_modules/.bin:/Users/osmt/.rvm/gems/ruby-2.3.0/bin:/Users/osmt/.rvm/gems/ruby-2.3.0@global/bin:/Users/osmt/.rvm/rubies/ruby-2.3.0/bin:node_modules/.bin:/Users/osmt/.npm-packages/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/osmt/.rvm/bin
-10 verbose lifecycle pi-radio@1.0.0~start: CWD: /Users/osmt/personal/pi-radio-3
+9 verbose lifecycle pi-radio@1.0.0~start: PATH: /Users/osmt/.npm-packages/lib/node_modules/npm/bin/node-gyp-bin:/Users/osmt/personal/pi-radio/node_modules/.bin:/Users/osmt/.rvm/gems/ruby-2.3.0/bin:/Users/osmt/.rvm/gems/ruby-2.3.0@global/bin:/Users/osmt/.rvm/rubies/ruby-2.3.0/bin:node_modules/.bin:/Users/osmt/.npm-packages/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/osmt/.rvm/bin
+10 verbose lifecycle pi-radio@1.0.0~start: CWD: /Users/osmt/personal/pi-radio
 11 silly lifecycle pi-radio@1.0.0~start: Args: [ '-c', 'node private/server.js' ]
 12 silly lifecycle pi-radio@1.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle pi-radio@1.0.0~start: Failed to exec start script
@@ -25,7 +25,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:850:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
 15 verbose pkgid pi-radio@1.0.0
-16 verbose cwd /Users/osmt/personal/pi-radio-3
+16 verbose cwd /Users/osmt/personal/pi-radio
 17 error Darwin 15.6.0
 18 error argv "/usr/local/bin/node" "/Users/osmt/.npm-packages/bin/npm" "start"
 19 error node v5.12.0

@@ -81,6 +81,7 @@ Otherwise you are using this on a pi so it wouldn't be difficult to program it d
 - Need to publish Station and song info when a user connects - currently it only emits to users with an active connection.
 - Add physical button/s to use the radio without a phone.
 - More Styling.
+- Look at [mpc and mpd](http://cagewebdev.com/raspberry-pi-playing-internet-radio/)
 
 ## Final notes
 

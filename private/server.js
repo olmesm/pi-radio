@@ -2,14 +2,14 @@
 
 const Hapi = require('hapi');
 const server = new Hapi.Server();
+const stations = require('./stations');
 
 server.connection({
     host: 'localhost',
-    port: 8000
+    port: 8000,
 });
 
 const io = require('socket.io')(server.listener);
-const stations = require('./stations');
 
 function streamerStatusUpdate(update) {
   io.emit('streamer.statusUpdate', update);
@@ -17,8 +17,19 @@ function streamerStatusUpdate(update) {
 
 const streamer = require('./streamer.js')(streamerStatusUpdate);
 
+function getStationName() {
+  const currentStation = stations.list.filter(station => station.url === streamer.currentStation)[0];
+
+  return currentStation ? currentStation.name : null;
+}
+
 function handleClient(socket) {
   io.emit('stations.list', stations.list);
+
+  io.emit('streamer.statusUpdate', {
+    stationName: getStationName(),
+    nowPlaying: streamer.currentSong,
+  });
 
   socket.on('station.add', newStation => {
     io.emit('station.added', stations.add(newStation));
@@ -41,28 +52,21 @@ function handleClient(socket) {
 io.on('connection', handleClient);
 
 server.register(require('inert'), (err) => {
+  if (err) { throw err; }
 
-    if (err) {
-        throw err;
+  server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: 'public',
+        listing: true,
+      }
     }
+  });
 
-    server.route({
-        method: 'GET',
-        path: '/{param*}',
-        handler: {
-            directory: {
-                path: 'public',
-                listing: true
-            }
-        }
-    });
-
-    server.start((err) => {
-
-        if (err) {
-            throw err;
-        }
-
-        console.log('Server running at:', server.info.uri);
-    });
+  server.start((err) => {
+      if (err) { throw err; }
+      console.log('Server running at:', server.info.uri);
+  });
 });
