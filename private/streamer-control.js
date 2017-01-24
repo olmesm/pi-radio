@@ -6,6 +6,13 @@ let radioStream;
 let startDelay;
 let display = {};
 
+const StreamerControl = {
+  play,
+  stop,
+  setDisplayObject,
+  emitPlayingStatus,
+}
+
 function setDisplayObject(emitter) {
   display.emitter = emitter;
   return display;
@@ -21,6 +28,7 @@ function play(station) {
 }
 
 function debouncePlay(station) {
+  display.station = station;
   radioStream = spawn('mplayer', [station.url]);
   let playStatusChange = true;
 
@@ -37,6 +45,7 @@ function debouncePlay(station) {
 
   radioStream.on('close', (code) => {
     display.playing = false;
+    display.station = '';
     emitPlayingStatus();
     console.log(`child process exited with code ${code}`);
   });
@@ -48,12 +57,6 @@ function emitPlayingStatus() {
 
 function stop() {
   spawn('pkill', ['mplayer'])
-}
-
-const StreamerControl = {
-  play,
-  stop,
-  setDisplayObject,
 }
 
 module.exports = StreamerControl;

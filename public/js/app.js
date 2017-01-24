@@ -31,6 +31,7 @@ var piRadio = new Vue({
   data: {
     stationsList: [],
     stationQuery: '',
+    streamerStatus: {},
   },
   methods: {
     searchFunc,
@@ -50,8 +51,8 @@ socket.on('gettingStations', function(data) {
 
 socket.on('streamer.status', function(data) {
   console.log('streamer.status', data)
+  piRadio.streamerStatus = data;
 });
-
 
 socket.on('stations.results', function (data) {
   console.log('gettingStations', data);

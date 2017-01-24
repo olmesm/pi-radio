@@ -73,7 +73,8 @@ function findStation(query) {
 function handleClient(socket) {
   let stationsToDisplay;
 
-  io.emit('stations.list', []);
+  socket.emit('stations.list', []);
+  streamer.emitPlayingStatus();
   isGettingStations();
 
   socket.on('stations.search', query => {
