@@ -10,8 +10,10 @@
   <body>
     <div id="pi-radio">
       <input v-model="stationQuery" @keyup="searchFunc">
-      <h2 v-if="streamerStatus.playing">{{streamerStatus.station.name}}</h2>
+      <h2 v-if="streamerStatus.station">{{streamerStatus.station.name}}</h2>
+      <h3 v-if="streamerStatus.nowPlaying">{{streamerStatus.nowPlaying}}</h3>
       <button @click="stopStation" v-if="streamerStatus.playing">Stop playing</button>
+      <button @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false">Play {{streamerStatus.station.name}}</button>
 
       <ul>
         <button v-for="station in stationsList" @click="playStation(station)">

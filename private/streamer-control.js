@@ -1,17 +1,17 @@
 'use strict';
 
 const spawn = require('child_process').spawn;
-
-let radioStream;
-let startDelay;
-let display = {};
-
+const pattern = /StreamTitle=\'[\s\S]*\';/;
 const StreamerControl = {
   play,
   stop,
   setDisplayObject,
   emitPlayingStatus,
 }
+
+let radioStream;
+let startDelay;
+let display = {};
 
 function setDisplayObject(emitter) {
   display.emitter = emitter;
@@ -28,15 +28,28 @@ function play(station) {
 }
 
 function debouncePlay(station) {
+  let playStatusChange = true;
+  let nowPlaying = '';
+
   display.station = station;
   radioStream = spawn('mplayer', [station.url]);
-  let playStatusChange = true;
 
   radioStream.stdout.on('data', data => {
     display.playing = true;
     if (playStatusChange) { emitPlayingStatus(); }
-    playStatusChange = false;
-    console.log(`stdout: ${data}`);
+      playStatusChange = false;
+
+    if (data.indexOf('StreamTitle') > -1) {
+      nowPlaying = pattern.exec(data)[0].replace('StreamTitle=\'', '');
+      nowPlaying = nowPlaying.slice(0, nowPlaying.indexOf('\';'));
+      if (nowPlaying !== display.nowPlaying) {
+        display.nowPlaying = nowPlaying;
+        emitPlayingStatus();
+      }
+      console.log('display.nowPlaying', display.nowPlaying);
+    }
+
+    // console.log(`radioStream > stdout: ${data}`);
   });
 
   radioStream.stderr.on('data', data => {
@@ -45,7 +58,7 @@ function debouncePlay(station) {
 
   radioStream.on('close', (code) => {
     display.playing = false;
-    display.station = '';
+    display.nowPlaying = '';
     emitPlayingStatus();
     console.log(`child process exited with code ${code}`);
   });

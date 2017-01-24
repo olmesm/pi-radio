@@ -8,7 +8,6 @@ const streamer = require('./streamer-control');
 
 let display = {};
 
-
 server.connection({
   host: 'localhost',
   port: 8000,
@@ -32,7 +31,6 @@ function emitter(socket, message) {
 }
 
 display.streamer = streamer.setDisplayObject(emitter);
-// display.streamer.emitter = emitter;
 
 function getStations() {
   isGettingStations(true);
