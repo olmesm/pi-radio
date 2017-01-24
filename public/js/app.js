@@ -40,13 +40,18 @@ var piRadio = new Vue({
   },
 });
 
-socket.on('stations.list', function (data) {
+socket.on('stations.list', function(data) {
   piRadio.stationsList = [];
 });
 
-socket.on('gettingStations', function (data) {
+socket.on('gettingStations', function(data) {
   console.log('gettingStations', data);
 });
+
+socket.on('streamer.status', function(data) {
+  console.log('streamer.status', data)
+});
+
 
 socket.on('stations.results', function (data) {
   console.log('gettingStations', data);

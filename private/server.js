@@ -6,9 +6,12 @@ const server = new Hapi.Server();
 const config = require('config');
 const streamer = require('./streamer-control');
 
+let display = {};
+
+
 server.connection({
-    host: 'localhost',
-    port: 8000,
+  host: 'localhost',
+  port: 8000,
 });
 
 const request = require('request');
@@ -23,6 +26,13 @@ function isGettingStations(bool) {
 
   return gettingStations;
 }
+
+function emitter(socket, message) {
+  return io.emit(socket, message);
+}
+
+display.streamer = streamer.setDisplayObject(emitter);
+// display.streamer.emitter = emitter;
 
 function getStations() {
   isGettingStations(true);
@@ -61,12 +71,13 @@ function findStation(query) {
 }
 
 function handleClient(socket) {
-  let stationsToDisplay = 10;
+  let stationsToDisplay;
 
   io.emit('stations.list', []);
   isGettingStations();
 
   socket.on('stations.search', query => {
+    stationsToDisplay = 10;
     socket.emit('stations.results', findStation(query).slice(0, stationsToDisplay));
   });
 
@@ -92,11 +103,9 @@ function handleClient(socket) {
 
 io.on('connection', handleClient);
 
-
-
 getStations();
 
-server.register(require('inert'), (err) => {
+server.register(require('inert'), err => {
   if (err) { throw err; }
 
   server.route({
@@ -110,8 +119,8 @@ server.register(require('inert'), (err) => {
     }
   });
 
-  server.start((err) => {
-      if (err) { throw err; }
-      console.log('Server running at:', server.info.uri);
+  server.start(err => {
+    if (err) { throw err; }
+    console.log('Server running at:', server.info.uri);
   });
 });
