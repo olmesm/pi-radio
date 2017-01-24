@@ -76,7 +76,13 @@ function handleClient(socket) {
   });
 
   socket.on('radio.play', station => {
-    console.log(station);
+    console.log('play', station.name);
+    streamer.play(station);
+  });
+
+  socket.on('radio.stop', () => {
+    console.log('stop!!');
+    streamer.stop();
   });
 
   socket.on('disconnect', () => {

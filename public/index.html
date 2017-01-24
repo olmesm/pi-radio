@@ -10,7 +10,7 @@
   <body>
     <div id="pi-radio">
       <input v-model="stationQuery" @keyup="searchFunc">
-
+<button @click="stopStation"></button>
       <ul>
         <button v-for="station in stationsList" @click="playStation(station)">
           <img style="height: 30px; max-width: 80px;"

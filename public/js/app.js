@@ -22,6 +22,10 @@ function playStation(station) {
   socket.emit('radio.play', station);
 }
 
+function stopStation() {
+  socket.emit('radio.stop');
+}
+
 var piRadio = new Vue({
   el: '#pi-radio',
   data: {
@@ -32,6 +36,7 @@ var piRadio = new Vue({
     searchFunc,
     displayMore,
     playStation,
+    stopStation,
   },
 });
 
