@@ -8,7 +8,10 @@
     <title>Pi Radio</title>
   </head>
   <body>
-    <div id="pi-radio"></div>
+    <div id="pi-radio">
+      <input v-model="stationQuery" @keyup="searchFunc(stationQuery)">
+      <button v-on:click="searchFunc"></button>
+    </div>
   </body>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="/socket.io/socket.io.js"></script>
