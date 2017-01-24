@@ -5,8 +5,10 @@ const server = new Hapi.Server();
 
 const config = require('config');
 const streamer = require('./streamer-control');
+const stationSaver = require('./station-saver');
+
 const stations = {
-  favourites: [],
+  favourites: stationSaver.list,
 };
 
 let display = {};
@@ -79,17 +81,17 @@ function handleClient(socket) {
   isGettingStations();
 
   socket.on('stations.favourites.add', station => {
-    stations.favourites.push(station);
+    stationSaver.add(station);
     io.emit('stations.favourites.list', stations.favourites);
   });
 
   socket.on('stations.favourites.remove', station => {
-    stations.favourites.splice(stations.favourites.indexOf(station), 1);
+    stationSaver.remove(stations.favourites.findIndex(stationItem => stationItem.id === station.id));
     io.emit('stations.favourites.list', stations.favourites);
   });
 
   socket.on('stations.favourites.list', () => {
-    io.emit('stations.favourites.list', stations.favourites);
+    io.emit('stations.favourites.list', stationSaver.list);
   });
 
   socket.on('stations.search', query => {
