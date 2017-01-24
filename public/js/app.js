@@ -26,10 +26,23 @@ function stopStation() {
   socket.emit('radio.stop');
 }
 
+function addFavourite(station) {
+  socket.emit('stations.favourites.add', station);
+}
+
+function removeFavourite(station) {
+  socket.emit('stations.favourites.remove', station);
+}
+
+function getFavourites() {
+  socket.emit('stations.favourites.list');
+}
+
 var piRadio = new Vue({
   el: '#pi-radio',
   data: {
     stationsList: [],
+    stationsFavourites: [],
     stationQuery: '',
     streamerStatus: {},
   },
@@ -38,6 +51,8 @@ var piRadio = new Vue({
     displayMore,
     playStation,
     stopStation,
+    addFavourite,
+    removeFavourite,
   },
 });
 
@@ -54,7 +69,14 @@ socket.on('streamer.status', function(data) {
   piRadio.streamerStatus = data;
 });
 
-socket.on('stations.results', function (data) {
+socket.on('stations.results', function(data) {
   console.log('gettingStations', data);
   piRadio.stationsList = data;
 });
+
+socket.on('stations.favourites.list', function(data) {
+  piRadio.stationsFavourites = data;
+  console.log('piRadio.stationsFavourites', piRadio.stationsFavourites)
+});
+
+getFavourites();

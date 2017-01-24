@@ -5,6 +5,9 @@ const server = new Hapi.Server();
 
 const config = require('config');
 const streamer = require('./streamer-control');
+const stations = {
+  favourites: [],
+};
 
 let display = {};
 
@@ -75,6 +78,20 @@ function handleClient(socket) {
   streamer.emitPlayingStatus();
   isGettingStations();
 
+  socket.on('stations.favourites.add', station => {
+    stations.favourites.push(station);
+    io.emit('stations.favourites.list', stations.favourites);
+  });
+
+  socket.on('stations.favourites.remove', station => {
+    stations.favourites.splice(stations.favourites.indexOf(station), 1);
+    io.emit('stations.favourites.list', stations.favourites);
+  });
+
+  socket.on('stations.favourites.list', () => {
+    io.emit('stations.favourites.list', stations.favourites);
+  });
+
   socket.on('stations.search', query => {
     stationsToDisplay = 10;
     socket.emit('stations.results', findStation(query).slice(0, stationsToDisplay));
@@ -93,10 +110,6 @@ function handleClient(socket) {
   socket.on('radio.stop', () => {
     console.log('stop!!');
     streamer.stop();
-  });
-
-  socket.on('disconnect', () => {
-    io.emit('user disconnected');
   });
 };
 

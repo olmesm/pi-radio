@@ -16,12 +16,27 @@
       <button @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false">Play {{streamerStatus.station.name}}</button>
 
       <ul>
-        <button v-for="station in stationsList" @click="playStation(station)">
-          <img style="height: 30px; max-width: 80px;"
+        <div v-for="station in stationsFavourites">
+          <button @click="playStation(station)">
+            <img style="height: 30px; max-width: 80px;"
             :src="station.favicon"
             onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
-          {{ station.name }}
-        </button>
+            {{ station.name }}
+          </button>
+          <button @click="removeFavourite(station)">Remove</button>
+        </div>
+      </ul>
+
+      <ul>
+        <div v-for="station in stationsList">
+          <button @click="playStation(station)">
+            <img style="height: 30px; max-width: 80px;"
+            :src="station.favicon"
+            onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
+            {{ station.name }}
+          </button>
+          <button @click="addFavourite(station)">Add</button>
+        </div>
       </ul>
 
       <button v-if="stationsList.length > 0" @click="displayMore">more...</button>
