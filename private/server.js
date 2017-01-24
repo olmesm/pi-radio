@@ -2,7 +2,9 @@
 
 const Hapi = require('hapi');
 const server = new Hapi.Server();
+
 const config = require('config');
+const streamer = require('./streamer-control');
 
 server.connection({
     host: 'localhost',
@@ -10,20 +12,30 @@ server.connection({
 });
 
 const request = require('request');
-let stationList = [];
 const io = require('socket.io')(server.listener);
 
+let stationList = [];
+let gettingStations = false;
+
+function isGettingStations(bool) {
+  if (typeof bool === 'boolean') { gettingStations = bool };
+  io.emit('gettingStations', gettingStations);
+
+  return gettingStations;
+}
+
 function getStations() {
-  io.emit('stations.list', 'meh');
+  isGettingStations(true);
 
   if (config.url.indexOf('http') > -1) {
     console.log('getting online')
     performOnlineRequest();
   } else {
+    io.emit('performOnlineRequest', true);
+
     console.log('getting local');
     stationList = require(config.url);
-    console.log('local', stationList[1]);
-    io.emit('stations.list', stationList[1]);
+    isGettingStations(false);
   }
 }
 
@@ -33,6 +45,7 @@ function performOnlineRequest() {
     json: true,
     headers: { 'User-Agent': 'request' }
   }, (err, res, data) => {
+    isGettingStations(false);
     if (err) {
       console.log('Error:', err);
     } else if (res.statusCode !== 200) {
@@ -44,23 +57,36 @@ function performOnlineRequest() {
 }
 
 function findStation(query) {
-  return stationList.filter(station => station.name.toLowerCase().indexOf(query) > -1).slice(0, 10);
+  return stationList.filter(station => station.name.toLowerCase().indexOf(query) > -1);
 }
 
 function handleClient(socket) {
+  let stationsToDisplay = 10;
+
   io.emit('stations.list', []);
-  io.emit('stations.list', stationList.length);
+  isGettingStations();
 
   socket.on('stations.search', query => {
-    socket.emit('stations.results', findStation(query));
+    socket.emit('stations.results', findStation(query).slice(0, stationsToDisplay));
   });
 
-  socket.on('disconnect', function () {
+  socket.on('stations.search.more', query => {
+    stationsToDisplay += 10;
+    socket.emit('stations.results', findStation(query).slice(0, stationsToDisplay));
+  });
+
+  socket.on('radio.play', station => {
+    console.log(station);
+  });
+
+  socket.on('disconnect', () => {
     io.emit('user disconnected');
   });
 };
 
 io.on('connection', handleClient);
+
+
 
 getStations();
 

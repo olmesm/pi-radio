@@ -9,8 +9,18 @@
   </head>
   <body>
     <div id="pi-radio">
-      <input v-model="stationQuery" @keyup="searchFunc(stationQuery)">
-      <button v-on:click="searchFunc"></button>
+      <input v-model="stationQuery" @keyup="searchFunc">
+
+      <ul>
+        <button v-for="station in stationsList" @click="playStation(station)">
+          <img style="height: 30px; max-width: 80px;"
+            :src="station.favicon"
+            onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
+          {{ station.name }}
+        </button>
+      </ul>
+
+      <button v-if="stationsList.length > 0" @click="displayMore">more...</button>
     </div>
   </body>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
