@@ -9,35 +9,55 @@
   </head>
   <body>
     <div id="pi-radio">
-      <input v-model="stationQuery" @keyup="searchFunc">
-      <h2 v-if="streamerStatus.station">{{streamerStatus.station.name}}</h2>
-      <h3 v-if="streamerStatus.nowPlaying">{{streamerStatus.nowPlaying}}</h3>
+      <h1>Pi Radio</h1>
+      <div class="search-stations">
+        Search:
+        <div class="search-input">
+          <input v-model="stationQuery" @keyup="searchFunc">
+        </div>
+      </div>
+      <div class="now-playing">
+        <div class="station-name">
+          Station:
+          <div v-if="streamerStatus.station">{{streamerStatus.station.name}}</div>
+        </div>
+        <div class="song-title" v-if="streamerStatus.nowPlaying">
+          Song:
+          <div v-if="streamerStatus.nowPlaying">{{streamerStatus.nowPlaying}}</div>
+        </div>
+      </div>
       <button @click="stopStation" v-if="streamerStatus.playing">Stop playing</button>
       <button @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false">Play {{streamerStatus.station.name}}</button>
 
-      <ul>
-        <div v-for="station in stationsFavourites">
-          <button @click="playStation(station)">
-            <img style="height: 30px; max-width: 80px;"
-            :src="station.favicon"
-            onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
-            {{ station.name }}
-          </button>
-          <button @click="removeFavourite(station)">Remove</button>
-        </div>
-      </ul>
-
-      <ul>
-        <div v-for="station in stationsList">
-          <button @click="playStation(station)">
-            <img style="height: 30px; max-width: 80px;"
-            :src="station.favicon"
-            onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
-            {{ station.name }}
-          </button>
-          <button @click="addFavourite(station)">Add</button>
-        </div>
-      </ul>
+      <div class="favourites">
+        Favourites:
+        <ul>
+          <div v-for="station in stationsFavourites">
+            <button @click="playStation(station)">
+              <img style="height: 30px; max-width: 80px;"
+              :src="station.favicon"
+              onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
+              {{ station.name }}
+            </button>
+            <button @click="removeFavourite(station)">Remove</button>
+          </div>
+        </ul>
+      </div>
+      
+      <div class="search-results">
+        Search Results:
+        <ul>
+          <div v-for="station in stationsList">
+            <button @click="playStation(station)">
+              <img style="height: 30px; max-width: 80px;"
+              :src="station.favicon"
+              onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
+              {{ station.name }}
+            </button>
+            <button @click="addFavourite(station)">Add</button>
+          </div>
+        </ul>
+      </div>
 
       <button v-if="stationsList.length > 0" @click="displayMore">more...</button>
     </div>
