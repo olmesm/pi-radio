@@ -45,10 +45,9 @@ function debouncePlay(station) {
       if (nowPlaying !== display.nowPlaying) {
         display.nowPlaying = nowPlaying;
         emitPlayingStatus();
+        console.log('display.nowPlaying', display.nowPlaying);
       }
-      console.log('display.nowPlaying', display.nowPlaying);
     }
-
     // console.log(`radioStream > stdout: ${data}`);
   });
 
