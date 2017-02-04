@@ -6,10 +6,13 @@ let searchDebounce;
 
 function clearSearch() {
   piRadio.stationsList = []
+  piRadio.spinner = false;
 }
 
 function searchFunc() {
+
   clearTimeout(searchDebounce);
+  piRadio.spinner = true;
   if (piRadio.stationQuery === '') { return clearSearch(); }
 
   searchDebounce = setTimeout(() => {
@@ -41,15 +44,21 @@ function getFavourites() {
   socket.emit('stations.favourites.list');
 }
 
+function noResults() {
+  return !this.spinner && this.stationQuery.length > 0 && this.stationsList.length === 0;
+}
+
 const piRadio = new Vue({
   el: '#pi-radio',
   data: {
     stationsList: [],
+    spinner: false,
     stationsFavourites: [],
     stationQuery: '',
     streamerStatus: {},
   },
   computed: {
+    noResults,
   },
   methods: {
     searchFunc,
@@ -77,6 +86,7 @@ socket.on('streamer.status', data => {
 socket.on('stations.results', data => {
   console.log('gettingStations', data);
   piRadio.stationsList = data;
+  piRadio.spinner = false;
 });
 
 socket.on('stations.favourites.list', data => {
