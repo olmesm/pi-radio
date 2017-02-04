@@ -1,4 +1,7 @@
-var socket = io();
+var io = require('socket.io-client');
+
+
+var socket = io('http://localhost:8000');
 var searchDebounce;
 
 function clearSearch() {
@@ -6,6 +9,8 @@ function clearSearch() {
 }
 
 function searchFunc() {
+  // stationQuery can also be event.target.value
+
   clearTimeout(searchDebounce);
   if (piRadio.stationQuery === '') { return clearSearch(); }
 
