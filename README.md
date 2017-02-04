@@ -3,8 +3,7 @@
 ## To run
 
 ```bash
-git clone https://github.com/olmesm/pi-radio.git
-cd pi-radio
+git clone https://github.com/olmesm/pi-radio.git && cd pi-radio
 npm run setup
 npm start
 ```

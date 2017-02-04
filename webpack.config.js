@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./private/app/js/entry.js",
+    entry: "./private/app/js/main.js",
     output: {
         path: __dirname,
         filename: "public/js/app.js"

@@ -12,7 +12,7 @@ function searchFunc() {
   clearTimeout(searchDebounce);
   if (piRadio.stationQuery === '') { return clearSearch(); }
 
-  searchDebounce = setTimeout(function() {
+  searchDebounce = setTimeout(() => {
     socket.emit('stations.search', piRadio.stationQuery);
   }, 1000)
 }
@@ -41,13 +41,15 @@ function getFavourites() {
   socket.emit('stations.favourites.list');
 }
 
-var piRadio = new Vue({
+const piRadio = new Vue({
   el: '#pi-radio',
   data: {
     stationsList: [],
     stationsFavourites: [],
     stationQuery: '',
     streamerStatus: {},
+  },
+  computed: {
   },
   methods: {
     searchFunc,
@@ -59,25 +61,25 @@ var piRadio = new Vue({
   },
 });
 
-socket.on('stations.list', function(data) {
+socket.on('stations.list', data => {
   piRadio.stationsList = [];
 });
 
-socket.on('gettingStations', function(data) {
+socket.on('gettingStations', data => {
   console.log('gettingStations', data);
 });
 
-socket.on('streamer.status', function(data) {
+socket.on('streamer.status', data => {
   console.log('streamer.status', data)
   piRadio.streamerStatus = data;
 });
 
-socket.on('stations.results', function(data) {
+socket.on('stations.results', data => {
   console.log('gettingStations', data);
   piRadio.stationsList = data;
 });
 
-socket.on('stations.favourites.list', function(data) {
+socket.on('stations.favourites.list', data => {
   piRadio.stationsFavourites = data;
   console.log('piRadio.stationsFavourites', piRadio.stationsFavourites)
 });
