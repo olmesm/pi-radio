@@ -4,9 +4,9 @@
 const fs = require('fs');
 
 function writeConfig() {
-  fs.writeFileSync(`${__dirname}/../public/config.json`, JSON.stringify(require('config')));
+  fs.writeFileSync(`${__dirname}/../private/app/js/config.json`, JSON.stringify(require('config')));
 
-  console.log('Config changed: www/js/config.json');
+  console.log('Config changed: private/app/js/config.json');
 }
 
 module.exports = writeConfig;

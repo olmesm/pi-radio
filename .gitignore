@@ -3,3 +3,4 @@ node_modules
 npm-debug.log
 public/js/app.js
 public/css/styles.css
+private/app/js/config.json

@@ -1,16 +1,14 @@
-var io = require('socket.io-client');
+const io = require('socket.io-client');
+const config = require('./config.json');
 
-
-var socket = io('http://localhost:8000');
-var searchDebounce;
+const socket = io(config.localAddress);
+let searchDebounce;
 
 function clearSearch() {
   piRadio.stationsList = []
 }
 
 function searchFunc() {
-  // stationQuery can also be event.target.value
-
   clearTimeout(searchDebounce);
   if (piRadio.stationQuery === '') { return clearSearch(); }
 
