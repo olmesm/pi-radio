@@ -25,22 +25,12 @@
             <input v-model="stationQuery" v-on:input="searchFunc" placeholder="Search...">
           </div>
         </section>
-        <section class="now-playing">
-          <div class="station-name">
-            Station:
-            <div v-if="streamerStatus.station">{{ streamerStatus.station.name }}</div>
-          </div>
-          <div class="song-title" v-if="streamerStatus.nowPlaying">
-            Song:
-            <div v-if="streamerStatus.nowPlaying">{{ streamerStatus.nowPlaying }}</div>
-          </div>
-        </section>
-        <button class="pure-button" @click="stopStation" v-if="streamerStatus.playing">Stop playing</button>
-        <button class="pure-button" @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false">Play {{streamerStatus.station.name}}</button>
       </header>
 
+      <main class="content">
+
       <section v-if="stationQuery.length === 0" class="pure-u-1 favourites">
-        <h2 class="pure-u-1">Favourites:</h2>
+        <h2 class="pure-u-1">Favourites</h2>
         <article class="pure-u-1 pure-u-sm-1-2 pure-u-lg-1-4 station" v-for="station in stationsFavourites">
           <div class="pure-button" @click="playStation(station)">
             <img style="height: 30px; max-width: 80px;"
@@ -53,7 +43,7 @@
       </section>
 
       <section v-if="stationsList.length > 0" class="pure-u-1 search-results">
-        <h2 class="pure-u-1">Search Results:</h2>
+        <h2 class="pure-u-1">Search Results</h2>
         <article class="pure-u-1 pure-u-sm-1-2 pure-u-lg-1-4 station" v-for="station in stationsList">
           <div class="pure-button" @click="playStation(station)">
             <img style="height: 30px; max-width: 80px;"
@@ -63,16 +53,34 @@
             <button class="pure-button" @click="addFavourite(station); $event.stopPropagation()">Add</button>
           </div>
         </article>
-        <button class="pure-button" v-if="stationsList.length > 0" @click="displayMore">more...</button>
+        <button class="pure-button more-button" v-if="stationsList.length > 0" @click="displayMore">more...</button>
       </section>
 
-    <section v-if="noResults">
-      <p>
-        No Results to display...
-      </p>
-    </section>
+      <section v-if="noResults">
+        <p>
+          No Results to display...
+        </p>
+      </section>
 
-      <div class="loader" v-if="spinner">Loading...</div>
+    </main>
+    <div class="loader" v-if="spinner">Loading...</div>
+
+      <div class="footer-spacer"></div>
+      <footer class="now-playing">
+        <div class="station-name">
+          <p v-if="streamerStatus.station">{{ streamerStatus.station.name }}</p>
+        </div>
+        <div class="song-title" v-if="streamerStatus.nowPlaying">
+          <p v-if="streamerStatus.nowPlaying">{{ streamerStatus.nowPlaying }}</p>
+        </div>
+
+        <div class="play-button">
+          <a @click="stopStation" v-if="streamerStatus.playing" title="Play station" class="play active"></a>
+          <a @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false" title="Play station" class="play"></a>
+        </div>
+        <!-- <button class="pause" @click="stopStation" v-if="streamerStatus.playing"></button>
+        <button class="play" @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false"></button> -->
+      </footer>
 
     </div>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>

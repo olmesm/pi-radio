@@ -7,21 +7,38 @@ $yellow: #EAD2AC;
 $orange: #E6B89C;
 $grey: #9CAFB7;
 $blue: #4281A4;
+$white: #fff;
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background: #9CAFB7;
-  height: 100%;
+$footer-height: 160px;
+
+$background: $blue;
+$foreground: $white;
+
+$foreground-light: $grey;
+
+$loading-color: $foreground-light;
+
+p {
+  letter-spacing: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 270px;
 }
 
+body {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background: $white;
+}
 
 header {
   position: relative;
-  height: 330px;
   background: #4281A4;
   box-shadow: 0px 5px 5px rgba(136, 136, 136, 0.47);
 
   h1 {
+    color: $white;
     text-align: center;
     font-family: 'Arimo', sans-serif;
   }
@@ -33,19 +50,22 @@ header {
     margin: 10px 0;
     border: none;
   }
+}
 
-  button {
-    margin: 10px;
-    position: relative;
-    bottom: -45px;
-    float: right;
-  }
+main.content {
+   .search-results {
+     text-align: center;
+
+      .more-button {
+        margin: 20px 0 30px 0;
+      }
+   }
 }
 
 div.pure-button {
   margin: 10px;
   width: calc(100% - 20px);
-  background: #4281A4;
+  background: $grey;
   border-radius: 3px;
 
   img {
@@ -58,4 +78,45 @@ div.pure-button {
   }
 }
 
+
+div.footer-spacer {
+  height: $footer-height;
+}
+
+
+footer.now-playing {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: $footer-height;
+  width: 100%;
+  background: $background;
+  text-align: center;
+
+  .play-button {
+    position: fixed;
+    margin: auto;
+    width: 100%;
+    bottom: 0px;
+    margin-bottom: 10px;
+  }
+
+  .station-name {
+    margin: 15px 0;
+    font-size: large;
+  }
+
+  .song-title {
+    font-size: medium;
+  }
+
+  p {
+    color: $white;
+    margin: auto;
+    width: 100%;
+    display: block;
+  }
+}
+
 @import 'loading-symbol';
+@import 'play-button';
