@@ -9,6 +9,7 @@
     "inert": "^4.1.0",
     "pm2": "^2.2.3",
     "request": "^2.79.0",
+    "socket.io-client": "^1.7.2",
     "socket.io": "^1.7.2"
   },
   "devDependencies": {
@@ -17,14 +18,14 @@
     "babel-preset-es2015": "^6.22.0",
     "css-loader": "^0.26.1",
     "json-loader": "^0.5.4",
-    "socket.io-client": "^1.7.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
     "pm2-first-run": "pm2 startup systemd && pm2 start private/server.js --name pi-radio && pm2 save",
-    "setup": "npm i && sudo npm i pm2 -g",
+    "setup-pi": "npm i --production",
+    "setup": "npm i",
     "client-only": "./scripts/write-config.js && webpack -w & node-sass ./private/app/scss/style.scss ./public/css/styles.css --watch & live-server ./public",
     "build": "./scripts/write-config.js && webpack && node-sass ./private/app/scss/style.scss ./public/css/styles.css",
     "start": "npm run build && node ./private/server.js",

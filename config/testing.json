@@ -1,3 +1,4 @@
 {
-  "url": "./stations.json"
+  "url": "./stations.json",
+  "localAddress": "http://localhost:8000"
 }
