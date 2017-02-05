@@ -9,7 +9,7 @@ $grey: #9CAFB7;
 $blue: #4281A4;
 $white: #fff;
 
-$footer-height: 160px;
+$footer-height: 150px;
 
 $background: $blue;
 $foreground: $white;
@@ -34,7 +34,7 @@ body {
 
 header {
   position: relative;
-  background: #4281A4;
+  background: $blue;
   box-shadow: 0px 5px 5px rgba(136, 136, 136, 0.47);
 
   h1 {
@@ -50,23 +50,37 @@ header {
     margin: 10px 0;
     border: none;
   }
+
+  .cancel-search {
+    position: absolute;
+    right: 12px;
+    bottom: 22px;
+    font-size: 36px;
+    color: #a9a9a9;
+  }
 }
 
 main.content {
-   .search-results {
-     text-align: center;
+  h2 {
+    margin: 20px 0 10px 0;
+    color: $blue;
+    text-shadow: 1px 1px 1px #e2e2e2, 1px 2px 1px #e2e2e2;
+  }
 
-      .more-button {
-        margin: 20px 0 30px 0;
-      }
-   }
+  .search-results {
+    text-align: center;
+  }
 }
 
-div.pure-button {
+.more-button {
+  margin: 20px 0 30px 0;
+}
+
+div.station-item {
   margin: 10px;
   width: calc(100% - 20px);
   background: $grey;
-  border-radius: 3px;
+  border-radius: 0;
 
   img {
     display: block;
@@ -75,9 +89,20 @@ div.pure-button {
 
   button {
     float: right;
+    background: transparent;
+    &:hover, &:focus {
+      background: transparent;
+    }
   }
-}
 
+  .inset-text {
+    color: rgba(88, 88, 88, 0.85);
+    text-shadow: 0px 1px 1px #e2e2e2, 0px 0px 1px #e2e2e2;
+  }
+
+  ::-moz-selection { background: #5af; color: #fff; text-shadow: none; }
+  ::selection { background: #5af; color: #fff; text-shadow: none; }
+}
 
 div.footer-spacer {
   height: $footer-height;
@@ -85,6 +110,7 @@ div.footer-spacer {
 
 
 footer.now-playing {
+  box-shadow: 0px -5px 5px rgba(136, 136, 136, 0.47);
   position: fixed;
   left: 0px;
   bottom: 0px;
@@ -102,12 +128,15 @@ footer.now-playing {
   }
 
   .station-name {
-    margin: 15px 0;
+    margin: 15px 0 5px 0;
     font-size: large;
   }
 
   .song-title {
-    font-size: medium;
+    font-size: small;
+    p {
+      letter-spacing: 1px;
+    }
   }
 
   p {

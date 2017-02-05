@@ -5,12 +5,16 @@ const socket = io(config.localAddress);
 let searchDebounce;
 
 function clearSearch() {
-  piRadio.stationsList = []
+  piRadio.stationsList = [];
   piRadio.spinner = false;
 }
 
-function searchFunc() {
+function cancelSearch() {
+  piRadio.stationQuery = '';
+  searchFunc();
+}
 
+function searchFunc() {
   clearTimeout(searchDebounce);
   piRadio.spinner = true;
   if (piRadio.stationQuery === '') { return clearSearch(); }
@@ -67,6 +71,7 @@ const piRadio = new Vue({
     stopStation,
     addFavourite,
     removeFavourite,
+    cancelSearch,
   },
 });
 
