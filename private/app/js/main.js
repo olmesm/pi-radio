@@ -20,7 +20,7 @@ function searchFunc() {
   if (piRadio.stationQuery === '') { return clearSearch(); }
 
   searchDebounce = setTimeout(() => {
-    socket.emit('stations.search', piRadio.stationQuery);
+    socket.emit('stations.search', piRadio.stationQuery.toLowerCase());
   }, 1000)
 }
 
