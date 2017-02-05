@@ -47,7 +47,7 @@ header {
     font-size: 36px;
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 0px 0 10px 0;
     border: none;
   }
 
@@ -114,17 +114,32 @@ footer.now-playing {
   position: fixed;
   left: 0px;
   bottom: 0px;
-  height: $footer-height;
+  height: 0px;
   width: 100%;
   background: $background;
   text-align: center;
+
+  -webkit-transition: 0.3s; /* Safari */
+  transition: 0.3s;
 
   .play-button {
     position: fixed;
     margin: auto;
     width: 100%;
-    bottom: 0px;
     margin-bottom: 10px;
+    bottom: -100px;
+
+    -webkit-transition: 0.3s; /* Safari */
+    transition: 0.3s;
+    transition-delay: 0.2s;
+  }
+
+  &.active {
+    height: $footer-height;
+
+    .play-button {
+      bottom: 0px;
+    }
   }
 
   .station-name {

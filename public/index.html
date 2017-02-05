@@ -66,7 +66,7 @@
 
     <div class="loader" v-if="spinner">Loading...</div>
 
-      <footer class="now-playing">
+      <footer class="now-playing" v-bind:class="{ active: streamerStatus.station }">
         <div class="station-name">
           <p v-if="streamerStatus.station">{{ streamerStatus.station.name }}</p>
         </div>
@@ -78,8 +78,6 @@
           <a @click="stopStation" v-if="streamerStatus.playing" title="Play station" class="play active"></a>
           <a @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false" title="Play station" class="play"></a>
         </div>
-        <!-- <button class="pause" @click="stopStation" v-if="streamerStatus.playing"></button>
-        <button class="play" @click="playStation(streamerStatus.station)" v-if="streamerStatus.playing === false"></button> -->
       </footer>
 
     </div>
