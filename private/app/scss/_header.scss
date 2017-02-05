@@ -1,0 +1,33 @@
+header {
+  position: relative;
+  background: $blue;
+  box-shadow: 0px 5px 5px rgba(136, 136, 136, 0.47);
+
+  h1 {
+    color: $white;
+    text-align: center;
+    font-family: 'Arimo', sans-serif;
+  }
+
+  .search-input{
+    position: relative;
+    z-index: 9;
+
+    input {
+      font-size: 36px;
+      width: 100%;
+      padding: 10px;
+      margin: 0px 0 10px 0;
+      border: none;
+    }
+}
+
+  .cancel-search {
+    position: absolute;
+    z-index: 10;
+    right: 12px;
+    bottom: 22px;
+    font-size: 36px;
+    color: #a9a9a9;
+  }
+}

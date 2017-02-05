@@ -34,48 +34,48 @@
         <section class="search-stations">
           <div class="search-input">
             <input v-model="stationQuery" v-on:input="searchFunc" placeholder="Search...">
-            <div v-if="stationQuery.length > 0" @click="cancelSearch" class="cancel-search">×</div>
+            <div v-show="stationQuery.length > 0" @click="cancelSearch" class="cancel-search">×</div>
           </div>
         </section>
       </header>
 
       <main class="content pure-u-1" v-if="!spinner">
 
-      <section v-if="stationQuery.length === 0" class="pure-u-1 favourites">
-        <h2 class="pure-u-1">Favourites</h2>
-        <article class="pure-u-1 pure-u-sm-1-2 pure-u-lg-1-4 station" v-for="station in stationsFavourites">
-          <div class="pure-button station-item" @click="playStation(station)">
-            <img style="height: 30px; max-width: 80px;"
-            :src="station.favicon"
-            onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
-            <p>{{ station.name }}</p>
-            <button class="pure-button inset-text" @click="removeFavourite(station); $event.stopPropagation()">Remove</button>
-          </div>
-        </article>
-      </section>
+        <section v-if="stationQuery.length === 0" class="pure-u-1 favourites">
+          <h2 class="pure-u-1">Favourites</h2>
+          <article class="pure-u-1 pure-u-sm-1-2 pure-u-lg-1-4 station" v-for="station in stationsFavourites">
+            <div class="pure-button station-item" @click="playStation(station)">
+              <img style="height: 30px; max-width: 80px;"
+                :src="station.favicon"
+                onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
+              <p>{{ station.name }}</p>
+              <button class="pure-button inset-text" @click="removeFavourite(station); $event.stopPropagation()">Remove</button>
+            </div>
+          </article>
+        </section>
 
-      <section v-if="stationsList.length > 0" class="pure-u-1 search-results">
-        <h2 class="pure-u-1">Search Results</h2>
-        <article class="pure-u-1 pure-u-sm-1-2 pure-u-lg-1-4 station" v-for="station in stationsList">
-          <div class="pure-button station-item" @click="playStation(station)">
-            <img style="height: 30px; max-width: 80px;"
-              :src="station.favicon"
-              onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
-            <p>{{ station.name }}</p>
-            <button class="pure-button inset-text" @click="addFavourite(station); $event.stopPropagation()">Add</button>
-          </div>
-        </article>
-      </section>
-      <button class="pure-button more-button" v-if="stationsList.length > 0" @click="displayMore">more...</button>
+        <section v-if="stationsList.length > 0" class="pure-u-1 search-results">
+          <h2 class="pure-u-1">Search Results</h2>
+          <article class="pure-u-1 pure-u-sm-1-2 pure-u-lg-1-4 station" v-for="station in stationsList">
+            <div class="pure-button station-item" @click="playStation(station)">
+              <img style="height: 30px; max-width: 80px;"
+                :src="station.favicon"
+                onerror="src='http://piq.codeus.net/static/media/userpics/piq_27081_400x400.png'">
+              <p>{{ station.name }}</p>
+              <button class="pure-button inset-text" @click="addFavourite(station); $event.stopPropagation()">Add</button>
+            </div>
+          </article>
+        </section>
+        <button class="pure-button more-button" v-if="stationsList.length > 0" @click="displayMore">more...</button>
 
-      <section v-if="noResults">
-        <p>No Results to display...</p>
-      </section>
+        <section v-if="noResults">
+          <p>No Results to display...</p>
+        </section>
 
-      <div class="footer-spacer"></div>
-    </main>
+        <div class="footer-spacer"></div>
+      </main>
 
-    <div class="loader" v-if="spinner">Loading...</div>
+      <div class="loader" v-if="spinner">Loading...</div>
 
       <footer class="now-playing" v-bind:class="{ active: streamerStatus.station }">
         <div class="station-name">
