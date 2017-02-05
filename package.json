@@ -23,7 +23,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "pm2-first-run": "pm2 startup systemd && pm2 start private/server.js --name pi-radio && pm2 save",
+    "pm2-setup": "pm2 startup systemd",
+    "pm2-first-run": "pm2 start private/server.js --name pi-radio && pm2 save",
     "setup-pi": "npm i --production",
     "setup": "npm i",
     "client-only": "./scripts/write-config.js && webpack -w & node-sass ./private/app/scss/style.scss ./public/css/styles.css --watch & live-server ./public",
