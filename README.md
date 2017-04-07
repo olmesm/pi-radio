@@ -1,6 +1,6 @@
 # Pi Radio
 
-![Screen Shot](./images/Screen Shot.png)
+![Screen Shot](/images/ScreenScreen%20Shot.png)
 
 ## Features
 
